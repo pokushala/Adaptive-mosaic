@@ -1,0 +1,4 @@
+MAX_TILE_SIZE = 150
+K_NEAREST_TILES = 5
+PREC = 0.03
+OUT_FILE = "mosaic_output.jpeg"
