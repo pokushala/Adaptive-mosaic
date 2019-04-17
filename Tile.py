@@ -23,5 +23,5 @@ class Tile:
     def __mean_lab(self):
         return convert_color(sRGBColor(*self.mean_rgb_clr), LabColor)
 
-    def scale_tile(self, new_w, new_h):
-        pass
+    def resize(self, size):
+        return self.tile.resize(size)

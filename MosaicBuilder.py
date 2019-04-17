@@ -18,7 +18,7 @@ class MosaicBuilder:
         self.mosaic_img = MosaicImage(image_data)
 
     # find k nearest tiles for a part and return one random
-    def nearest_tile(self, part_data, k=K_NEAREST_TILES):
+    def nearest_tile_index(self, part_data, k=K_NEAREST_TILES):
         # go through each tile in turn looking for the best match for the part of the image represented by 'img_data'
         part_mean_lab_clr = self.mean_lab_clr(part_data)
         clr_differences_between_part_and_tiles = np.array([self.color_distance_lab(tile.mean_lab_clr, part_mean_lab_clr) for tile in self.tiles_data])
@@ -58,7 +58,8 @@ class MosaicBuilder:
                 pocket_with_quarters += current_quarters # его части добавили в карман для дальнейшего деления 
             else:
                 for quarter in current_quarters:  
-                    self.mosaic_img.add_tile(quarter[0], quarter[1]) # иначе сразу вставляем четверти в мозайку
+                    tile_to_paste = self.tiles_data[self.nearest_tile_index(quarter[0])]
+                    self.mosaic_img.add_tile(tile_to_paste, quarter[1]) # иначе сразу вставляем четверти в мозайку
                 result_slices += current_quarters
             current_img = pocket_with_quarters.pop(0)   
         self.mosaic_img.save(OUT_FILE)
