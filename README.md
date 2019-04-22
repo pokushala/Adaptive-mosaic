@@ -2,7 +2,7 @@
 
 ## Зависимости
 
-* [ski-image](https://scikit-image.org/)
+* [scikit-image](https://scikit-image.org/)
 * [numpy](https://docs.scipy.org/doc/numpy/index.html)
 * [scipy](https://www.scipy.org/)
 * [matplotlib](https://matplotlib.org/)
