@@ -41,7 +41,6 @@ class Tiles:
                                 paths_to_load.append(item.path)
                         except ValueError:
                             print(f"Skip: {item.path}")
-        paths_to_load = random.sample(paths_to_load, 200)
 
         return io.ImageCollection(paths_to_load, conserve_memory=False, load_func=_load_func)
 
