@@ -66,7 +66,7 @@ def mosaic(args):
         resized = transform.resize(tiles[index], (height, width))
         mos[y: y + height, x: x + width] = resized
 
-    alpha = 0.6
+    alpha = args.alpha
     res = alpha * mos + (1 - alpha) * image_data
     res = np.clip(res, 0, 1)
     plt.imshow(res)
