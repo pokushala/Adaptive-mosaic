@@ -7,6 +7,8 @@ from skimage import color
 
 import tile
 
+__all__ = ["Box", "MosaicBuilder"]
+
 Box = Tuple[int]
 
 
@@ -26,7 +28,7 @@ class MosaicBuilder:
         part_mean_lab_clr = self.mean_lab_clr(box)
         clr_differences_between_part_and_tiles = np.array(tuple(self.color_distance_lab(self.tiles_data.mean_colors[i], part_mean_lab_clr)
                                                            for i in range(len(self.tiles_data))))
-        best_fit_tile_indexes = np.argpartition(clr_differences_between_part_and_tiles, self._k_near, axis=None)[:self._k_near]
+        best_fit_tile_indexes = np.argpartition(clr_differences_between_part_and_tiles, self._k_near - 1, axis=None)[:self._k_near]
         tile_index = random.choice(best_fit_tile_indexes)
         return tile_index
 
@@ -56,12 +58,12 @@ class MosaicBuilder:
             assert len(init_box) == 4, "The length of init_box must be equal to 4."
             x0, y0, in_width, in_height = init_box
             im_width, im_height = image.shape[-2::-1]
-            assert in_width <= 0, "The init width must be > 0."
-            assert in_height <= 0, "The init width must be > 0."
+            assert in_width > 0, "The init width must be > 0."
+            assert in_height > 0, "The init width must be > 0."
             assert 0 <= x0 < im_width, "The init box is outside of image boundary."
             assert 0 <= y0 < im_height, "The init box is outside of image boundary."
-            assert 0 <= x0 + in_width < im_width, "The init box is outside of image boundary."
-            assert 0 <= y0 + in_height < im_height, "The init box is outside of image boundary."
+            assert 0 <= x0 + in_width <= im_width, "The init box is outside of image boundary."
+            assert 0 <= y0 + in_height <= im_height, "The init box is outside of image boundary."
 
         pocket_with_quarters = [(0, 0) + image.shape[-2::-1]] if init_box is None else [init_box]
         result_slices = []

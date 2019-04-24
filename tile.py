@@ -1,11 +1,14 @@
 import os
 import random
+import warnings
 
 import numpy as np
 import skimage
 from PIL import Image
 from skimage import color
 from skimage import io
+
+__all__ = ["Tiles"]
 
 
 def _load_func(path):
@@ -40,7 +43,7 @@ class Tiles:
                             if ext in self.__exts:
                                 paths_to_load.append(item.path)
                         except ValueError:
-                            print(f"Skip: {item.path}")
+                            warnings.warn("Skip: {}. It has not extension.".format(item.path))
 
         return io.ImageCollection(paths_to_load, conserve_memory=False, load_func=_load_func)
 
