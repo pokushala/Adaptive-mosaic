@@ -5,7 +5,6 @@
 * [scikit-image](https://scikit-image.org/)
 * [numpy](https://docs.scipy.org/doc/numpy/index.html)
 * [scipy](https://www.scipy.org/)
-* [matplotlib](https://matplotlib.org/)
 * [Pillow](https://pillow.readthedocs.io/en/stable/index.html)
 
 ## Данные с иконками 
@@ -16,4 +15,5 @@
 ```
 python .\mosaic.py --image путь_к_изображению --tiles-dir путь_к_директории_с_иконками
 ```
+Если название результирующего файла не указано с помощью аргумента `--out, -o`, то выходной файл сохраняется в туже директорию что и исходный. К имени файла добавляется `_out`.
  Структура директории с иконками может быть любой. Используется рекурсивное сканирование и рассматриваются только файлы с раширением `.jpg`, `.png`.
